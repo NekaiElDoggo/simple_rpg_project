@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Main menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-
+    <h1>Idle RPG</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        <label>Pseudo : <input type="text" name="pseudo" value="{{ pseudo or '' }}"></label>
+        <button type="submit">Jouer</button>
+    </form>
 </body>
 </html>

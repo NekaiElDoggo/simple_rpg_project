@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Main game</title>
+    <title>Idle RPG - Jeu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-
+    <h1>Idle RPG</h1>
+    <div class="container">
+        <div class="cadre" id="cadre_joueur">
+            <h2>Joueur</h2>
+            <ul>
+                <li>Niveau : <span id="niveau_joueur"></span></li>
+                <li>XP : <span id="xp_joueur"></span></li>
+                <li>PV : <span id="pv_joueur"></span> / <span id="pvmax_joueur"></span></li>
+                <li>Attaque : <span id="force_joueur"></span></li>
+                <li>Défense : <span id="def_joueur"></span></li>
+                <li>Or : <span id="or_joueur"></span></li>
+            </ul>
+            <h3>Équipement</h3>
+            <ul id="equipement_joueur">
+                <li id="eq_Armes">Arme : -</li>
+                <li id="eq_Plastron">Plastron : -</li>
+                <li id="eq_Casque">Casque : -</li>
+                <li id="eq_Bottes">Bottes : -</li>
+            </ul>
+        </div>
+        <div class="cadre" id="cadre_monstre">
+            <h2>Monstre</h2>
+            <div id="monstre_zone">
+                <ul>
+                    <li>Nom : <span id="nom_monstre">{{ monstre.nom }}</span></li>
+                    <li>PV : <span id="pv_monstre">{{ monstre.pv }}</span></li>
+                    <li>Force : <span id="force_monstre">{{ monstre.force }}</span></li>
+                    <li>Défense : <span id="def_monstre">{{ monstre.defense }}</span></li>
+                    <li>XP à gagner : <span id="xp_monstre">{{ monstre.xp }}</span></li>
+                    <li>Or à gagner : <span id="or_monstre">{{ monstre.or }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button id="btn_rencontrer" onclick="rencontrerMonstre()">Rencontrer un monstre</button>
+        <button id="btn_combat" onclick="tourDeCombat()" disabled>Lancer le combat</button>
+        <button id="btn_terminer" onclick="terminerCombat()" style="display:none;">Terminer le combat</button>
+    </div>
+    <div id="combat_log"></div>
+    <div id="resultat"></div>
+    <div id="loot_zone"></div>
+    <script src="{{ url_for('static', filename='js/combat.js') }}"></script>
+    <script>
+        initialiserJeu({{ joueur|tojson }}, {{ monstre|tojson }});
+    </script>
 </body>
 </html>
